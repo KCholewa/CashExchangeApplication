@@ -6,20 +6,21 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
-@Entity(name = "currencies")
-public class Currency {
+@Entity(name = "Transactions")
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
-    private String currency;
+    BigDecimal value;
 
     @Column
-    private BigDecimal value;
+    private Date date;
 }
