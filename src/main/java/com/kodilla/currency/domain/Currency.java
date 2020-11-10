@@ -1,15 +1,15 @@
 package com.kodilla.currency.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
-@AllArgsConstructor
+@Setter
 @Entity(name = "currencies")
 public class Currency {
 
@@ -22,4 +22,16 @@ public class Currency {
 
     @Column
     private BigDecimal value;
+
+    @OneToMany(targetEntity = Transaction.class,
+    mappedBy = "currency",
+    cascade = CascadeType.ALL,
+    fetch = FetchType.EAGER)
+    private List<Currency> currencies = new ArrayList<>();
+
+    public Currency(Long id, String currency, BigDecimal value) {
+        this.id = id;
+        this.currency = currency;
+        this.value = value;
+    }
 }

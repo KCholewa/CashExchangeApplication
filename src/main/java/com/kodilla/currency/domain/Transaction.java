@@ -1,16 +1,14 @@
 package com.kodilla.currency.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @NoArgsConstructor
+@Setter
 @Getter
-@AllArgsConstructor
 @Entity(name = "Transactions")
 public class Transaction {
 
@@ -19,8 +17,18 @@ public class Transaction {
     private Long id;
 
     @Column
-    BigDecimal value;
+    private BigDecimal value;
 
     @Column
     private Date date;
+
+    @ManyToOne
+    @JoinColumn(name = "currencies_id")
+    private Currency currency;
+
+    public Transaction(Long id, BigDecimal value, Date date) {
+        this.id = id;
+        this.value = value;
+        this.date = getDate();
+    }
 }
