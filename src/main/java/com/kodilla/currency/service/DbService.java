@@ -26,7 +26,7 @@ public class DbService {
         currencyRepository.deleteById(id);
     }
 
-    public Optional<Currency> getTaskByID(final long id) {
+    public Optional<Currency> getCurrencyByID(final long id) {
         return currencyRepository.findById(id);
     }
 }

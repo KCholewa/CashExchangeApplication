@@ -26,9 +26,13 @@ public class CurrencyController {
         return currencyMapper.mapToCurrencyDtoList(service.getAllCurrencies());
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/Currencies/{CurrencyId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/Currencies/{currencyId}")
     public void deleteCurrency(@PathVariable Long currencyId) {
         service.deleteCurrencyById(currencyId);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/currencies/{currencyId}")
+    public  CurrencyDto getCurrency(@PathVariable Long currencyId) throws CurrencyNotFoundException {
+        return currencyMapper.mapToCurrencyDto(service.getCurrencyByID(currencyId).orElseThrow(CurrencyNotFoundException::new));
+    }
 }
